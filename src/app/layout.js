@@ -24,8 +24,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning={true}
       >
-        <Navbar />
-        <main className="max-w-7xl mx-auto max-h-screen">{children}</main>
+        <div className="bg-white">
+          <Navbar />
+          <main className="max-w-7xl mx-auto max-h-screen">{children}</main>
+        </div>
       </body>
     </html>
   );
