@@ -1,10 +1,29 @@
-import React from 'react'
+"use client"
+
+import { addProduct } from "@/redux/features/products/productSlice"
+import { useForm } from "react-hook-form"
+import { useDispatch } from "react-redux"
+
+
+
 
 const AddProduct = () => {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm()
+
+    const dispatch = useDispatch()
+
+    const onSubmit = (data) => {
+        dispatch(addProduct(data))
+    }
     return (
         <div className='max-w-md mx-auto bg-white shadow-lg rounded-lg p-6'>
             <h2 className='text-xl font-semibold text-gray-700 mb-4'>Add New Product</h2>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='space-y-4'>
                     {/* name */}
                     <label className='block text-sm text-gray-600 font-medium'>Product Name:</label>
@@ -12,6 +31,7 @@ const AddProduct = () => {
                         type="text"
                         name='name'
                         id='name'
+                        {...register("name", { required: true })}
                         placeholder='Product 1'
                         className='w-full bg-gray-50 text-black mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 ring-indigo-500'
                     />
@@ -20,6 +40,7 @@ const AddProduct = () => {
                     <select
                         name="category"
                         id="category"
+                        {...register("category", { required: true })}
                         className='w-full bg-gray-50 text-black mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 ring-indigo-500'
                     >
                         <option value="">Choose a Category</option>
@@ -33,6 +54,7 @@ const AddProduct = () => {
                         type="text"
                         name='image'
                         id='image'
+                        {...register("image", { required: true })}
                         placeholder='paste your url'
                         className='w-full bg-gray-50 text-black mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 ring-indigo-500'
                     />
@@ -42,6 +64,7 @@ const AddProduct = () => {
                         <div>
                             <label className='block text-sm text-gray-600 font-medium'>Price:</label>
                             <input
+                                {...register("price", { required: true })}
                                 type="text"
                                 name='price'
                                 id='price'
@@ -55,7 +78,7 @@ const AddProduct = () => {
                                 type="date"
                                 name='date'
                                 id='date'
-
+                                {...register("date", { required: true })}
                                 className='w-full bg-gray-50 text-black mt-1 p-2 border rounded-lg focus:outline-none focus:ring-2 ring-indigo-500'
                             />
                         </div>
